@@ -63,7 +63,7 @@
       //1 = Event Created Suc
         $eData = $_GET['e'];
         
-        $output = array("Ride Joined Successfully","Ride Canceled Successfully","Ride Canceled Successfully. Any passengers in your car have been notified.","Ride Created Successfully");
+        $output = array("Ride Joined Successfully","Ride Canceled Successfully","Ride Canceled Successfully. Any passengers in your car have been notified.","Ride Created Successfully","Event Upadated Successfully","Event Created Successfully","Ride Updated Successfully");
                    
         if($eData<=0)
         {

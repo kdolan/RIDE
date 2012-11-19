@@ -18,11 +18,11 @@ connectToDb();
  $seatsAvaliable = secureInput($_POST['seatsAvaliable']);
  
  $carId = secureInput($_POST['carId']);
- //$passengers = $_POST['passengers[]'][2];
+//$passengers = $_POST['passengers[]'][2];
 // echo $driverName."<br>";
 //echo "Passengers: ".$passengers;
 
-$passengers = secureInput($_POST['passegers']);
+$passengers = $_POST['passegers']; //get array of passengers.
  
 
 
@@ -57,7 +57,8 @@ $passengers = secureInput($_POST['passegers']);
     //Make sure no users listed already have rides.
     foreach($passengers as $passengerName) 
     {
-   
+        
+        $passengerName = secureInput($passengerName);
         $query = "SELECT * FROM `kevin_ride`.`passengers` WHERE `passengers`.`eventId`=$eventId AND `passengers`.`passengerName` LIKE '$passengerName'";
          //echo  $query;
         $result = mysql_query($query);
@@ -105,5 +106,5 @@ $passengers = secureInput($_POST['passegers']);
              `passengers`.`eventId` =$eventId AND `passengers`.`carId`=0 AND `passengers`.`passengerName` LIKE '$passengerName'";
              mysql_query($query); 
     } 
-     header("location:../createRide.php?edit=1&eventId=".$eventId."&carId=".$carId."&e=2"); 
+     header("location:../joinRide?eventId=$eventId&currentEvents=1&e=7"); 
 ?> 

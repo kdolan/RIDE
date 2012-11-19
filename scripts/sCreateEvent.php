@@ -66,6 +66,6 @@ VALUES ('$id', '$eventName', '$description', '$isCamping', '$startDate', '$endDa
 
 mysql_query($query);
 
-header("location:../selectEvent.php?e=1"); 
+header("location:../selectEvent.php?e=6"); 
 
 ?>
