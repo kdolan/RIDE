@@ -303,15 +303,18 @@ function printCreateRideButton($eventId)
 function printSelectRideButtons($eventId, $createRide, $isCamping)
 {
     //Get Username
-    $userName = $_SERVER['WEBAUTH_USER']; 
+    //$userName = $_SERVER['WEBAUTH_USER']; 
     $eventId = secureInput($eventId); 
-    $eventId = secureInput($createRide);
-    $isCamping = secureInput($createRide);   
+    //$eventId = secureInput($createRide);
+    //$isCamping = secureInput($createRide);   
     
-    $canJoinRides = isUserEligibleToJoinRide($eventId, $userName);
-    $createdRide = didUserCreateRide($eventId, $userName);
+    //$canJoinRides = isUserEligibleToJoinRide($eventId, $userName);
+    //$createdRide = didUserCreateRide($eventId, $userName);
     
-    if($createRide) //Print create ride button if they can create a ride or view rides button.
+    
+    echo '<td><a class="btn btn-info" href="joinRide.php?eventId='.$eventId.'">Select Event &raquo;</a>';   
+    
+    /*if($createRide) //Print create ride button if they can create a ride or view rides button.
     {     
       
          if($createdRide)  //Print View Rides Button
@@ -338,7 +341,7 @@ function printSelectRideButtons($eventId, $createRide, $isCamping)
          }
          
          //Code for tents here
-    }
+    }*/
     
     
 }

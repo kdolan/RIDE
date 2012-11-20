@@ -61,7 +61,7 @@ uxRedirect($eData);
       //1 = Event Created Suc
           $eData = $_GET['e'];
         
-        $output = array("Event Created Successfully","Event Eddited Successfully");
+       $output = array("Ride Joined Successfully","Ride Canceled Successfully","Ride Canceled Successfully. Any passengers in your car have been notified.","Ride Created Successfully","Event Upadated Successfully","Event Created Successfully","Ride Updated Successfully");
                    
         if($eData<=0)
         {
@@ -84,8 +84,7 @@ uxRedirect($eData);
              
               $pageType = $_GET["type"];
             
-            $eventListTable = mysql_query("SELECT * FROM `eventList` WHERE `depatrueEnd` >= NOW()") 
-                     or deveie(mysql_error()); 
+           $eventListTable = mysql_query("SELECT * FROM `kevin_ride`.`eventList` WHERE `depatrueEnd` >= NOW()") ;
                      
                      
                      
