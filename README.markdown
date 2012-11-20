@@ -19,5 +19,6 @@ Planned Features and Fixes
 	* Improve superbar usibility.
 * Features
 	* Add camping support. (Framework already in pace just need to setup the backend.)
+	* Complete User Details page 
 	* Fix misc bugs
 	
