@@ -1,20 +1,5 @@
 <?php
- 
-
-//Db Login Info
-function connectToDb(){
-    $host="db.csh.rit.edu"; // Host name
-    $dbusername="kevin_ride"; // Mysql username
-    $dbpassword="vim66#appositive"; // Mysql password
-    $db_name="kevin_ride"; // Database name
-    //$tbl_name="0~0"; // Table name
-    
-    // Connect to server and select databse.
-    
-    mysql_connect("$host", "$dbusername", "$dbpassword")or die();
-    mysql_select_db("$db_name")or die();
-}
-
+require dbConnect.php;
 
 function secureInput($inputString)
 {
