@@ -9,3 +9,15 @@ users who cannot find a ride.
 Dependencies
 ------------
 * MySQL - Backend datastore
+* WebAuth - Currently RIDE is configured to be behind WebAuth. However, this can 
+easily be changed to work with a different authentication system.
+
+Planned Features and Fixes
+------------
+* UI Changes
+	* Move superbar from bottom of create/edit ride pages to under each input field.
+	* Improve superbar usibility.
+* Features
+	* Add camping support. (Framework already in pace just need to setup the backend.)
+	* Fix misc bugs
+	
