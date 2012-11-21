@@ -73,6 +73,9 @@ $passengers = $_POST['passegers'];
     //Make sure no users listed already have rides.
     foreach($passengers as $passengerName) 
     {
+        //Get the username of the passenger if $passengerName is the format "Kevin Dolan (kdolan)"
+        $passengerName = stripUsername($passengerName);
+        
         $passengerName = secureInput($passengerName);
         $query = "SELECT * FROM `kevin_ride`.`passengers` WHERE `passengers`.`eventId`=$eventId AND `passengers`.`passengerName` LIKE '$passengerName'";
         $result = mysql_query($query);
@@ -88,6 +91,10 @@ $passengers = $_POST['passegers'];
     //Then if no errors add passengers to table
     foreach($passengers as $passengerName) {
         //echo $passengerName.'<br />';
+        //Get the username of the passenger if $passengerName is the format "Kevin Dolan (kdolan)"
+        $passengerName = stripUsername($passengerName);
+        
+        $passengerName = secureInput($passengerName);
         
         if($passengerName=='')
         {

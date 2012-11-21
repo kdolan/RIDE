@@ -236,7 +236,7 @@
           <legend><?php if($_GET['edit']==1) {echo "Editing Ride ~ ".$event['eventName'];} else {echo 'Createing a Ride ~ '.$event['eventName'];} ?>:</legend>
           
           <label>Driver Name </label>
-          <input type="text" value="<?php echo $_SERVER['WEBAUTH_USER']; ?>" name="driverName" readonly>
+          <input type="text" value="<?php echo queryUsername($_SERVER['WEBAUTH_USER']); ?>" name="driverName" readonly>
           <span class="help-block">Valid Departure Window: <?php echo (date('D M d \a\t h:i A',$eventDepartStartTimeStamp)); ?> <em>to</em> 
 		  <?php 
 		  				if( date('D M d',$eventDepartStartTimeStamp) == date('D M d',$eventDepartEndTimeStamp ) )
@@ -293,7 +293,7 @@
                                 <label>Current Passenger</label> ';
                                     $printedFormating = true; 
                                 }
-                               echo '<input type="text" readonly placeholder="Passenger Name" value="'.$passengerName.'" name="na" > 
+                               echo '<input type="text" readonly placeholder="Passenger Name" value="'.queryUsername($passengerName).'" name="na" > 
                             <a class="btn btn-danger" href="scripts/sRemovePassenger.php?eventId='.$eventId.'&carId='.$carId.'&passengerName='.$passengerName.'">Remove Passenger</a><br>';
                             $numberOfCurrentPassengers++;
                             

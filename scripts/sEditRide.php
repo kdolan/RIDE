@@ -57,6 +57,8 @@ $passengers = $_POST['passegers']; //get array of passengers.
     //Make sure no users listed already have rides.
     foreach($passengers as $passengerName) 
     {
+        //Get the username of the passenger if $passengerName is the format "Kevin Dolan (kdolan)"
+        $passengerName = stripUsername($passengerName);
         
         $passengerName = secureInput($passengerName);
         $query = "SELECT * FROM `kevin_ride`.`passengers` WHERE `passengers`.`eventId`=$eventId AND `passengers`.`passengerName` LIKE '$passengerName'";
@@ -80,7 +82,10 @@ $passengers = $_POST['passegers']; //get array of passengers.
         {
             continue;
         }
-
+        //Get the username of the passenger if $passengerName is the format "Kevin Dolan (kdolan)"
+        $passengerName = stripUsername($passengerName);
+        
+        $passengerName = secureInput($passengerName);
         
         //Get next avalibable ID
         $queryNextAvail="SELECT * FROM `kevin_ride`.`passengers` ORDER BY `passengers`.`id` DESC";

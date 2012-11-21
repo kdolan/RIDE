@@ -1,10 +1,39 @@
 <?php
 require ("dbConnect.php");
+include_once("ldap_wrapper.php"); 
 
 function secureInput($inputString)
 {
       $safeString = mysql_real_escape_string($inputString);
       return $safeString;
+}
+
+function queryUsername($username)
+{
+    $ldap = new LdapWrapper();
+    return $ldap->query_username($username);
+}
+
+function queryName($name)
+{
+    $ldap = new LdapWrapper();
+    return $ldap->query_name($name);
+}
+
+function stripUsername($combinedName) //combinedName is in the format "Kevin Dolan (kdolan)"
+{
+    //validate that the input string has an open parenthese followed by a closing parenthese. 
+    $subString = strstr($combinedName,'(');
+    if($subString!=false)
+    {
+        if(strstr($subString,')')!=false)
+        {
+        $usernameArray = explode('(',$combinedName);
+        $username = substr_replace($usernameArray[1] ,"",-1); //remove the last character in the string. Will be ')'. Left with username.
+        return $username;
+        }
+    }
+    return $combinedName;
 }
 
 function uxRedirect($edata='') 
@@ -416,7 +445,7 @@ function printJoinRideTable($eventId, $selTent)
                      //Print Table
                         echo '<tr>
                           <td>'.$count.'</td>
-                          <td>'.$ride['driverName'].'</td>
+                          <td>'.queryUsername($ride['driverName']).'</td>
                           <td>'. date('D M d \a\t h:i A',$rideDepartTimeStamp) .'</td>
                           <td>'.$seatsAvail.'/'.$ride['seatsAvailable'].'</td>
                           <td>'; 
@@ -427,11 +456,11 @@ function printJoinRideTable($eventId, $selTent)
                                           
                                          if ($counter==0)
                                         {                                          
-                                             echo $passenger['passengerName'];             
+                                             echo queryUsername($passenger['passengerName']);             
                                         }
                                         else
                                         {    
-                                         echo ', '.$passenger['passengerName'];       
+                                         echo ', '.queryUsername($passenger['passengerName']);     
                                               
                                         }
                                         //echo $counter; 
@@ -465,11 +494,11 @@ function printJoinRideTable($eventId, $selTent)
                                           
                                          if ($counter==0)
                                         {                                          
-                                             echo $passenger['passengerName'];             
+                                             echo queryUsername($passenger['passengerName']);               
                                         }
                                         else
                                         {    
-                                         echo ', '.$passenger['passengerName'];       
+                                         echo ', '.queryUsername($passenger['passengerName']);       
                                               
                                         }
                                         //echo $counter; 

@@ -12,8 +12,12 @@ Dependencies
 * WebAuth - Currently RIDE is configured to be behind WebAuth. However, this can 
 easily be changed to work with a different authentication system.
 
+Features
+------------
+
 Planned Features and Fixes
 ------------
+(x) - indicates feature has been implemented.
 * UI Changes
 	* Move superbar from bottom of create/edit ride pages to under each input field.
 	* Improve superbar usibility.
@@ -24,5 +28,5 @@ Planned Features and Fixes
 	* Admin table in database allowing admin users to edit all events/rides.
 	* Allow admins to change driver name for a ride.
 * Backend
-	* Functions usernameToName and nameToUsername
+	* (x)Functions usernameToName and nameToUsername
 	

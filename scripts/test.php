@@ -1,5 +1,6 @@
 <?php
      include_once("ldap_wrapper.php"); 
+     include_once("func.php"); 
  ?>
  <head>
     <script src="superbar.js">
@@ -7,8 +8,9 @@
  </head>
  <body>
        <?php   
-     $ldap = new LdapWrapper();
-     echo $ldap->query_username("kdolan");
+     //$ldap = new LdapWrapper();
+     //echo $ldap->query_username($_SERVER['WEBAUTH_USER'] );
+     echo queryUsername("kdolan");
         ?>
          <script type="text/javascript">
     selected = new Array()
