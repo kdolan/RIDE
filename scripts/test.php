@@ -10,8 +10,20 @@
        <?php   
      //$ldap = new LdapWrapper();
      //echo $ldap->query_username($_SERVER['WEBAUTH_USER'] );
-     echo queryUsername("kdolan");
+
         ?>
+              <input type="text" value="<?php echo queryUsername( $_SERVER['WEBAUTH_USER'] ); ?>" id="driverName" name="driverName" readonly>
+     <script type="text/javascript">
+        function overrideActive()
+        {
+            var driverName = document.getElementById('driverName');
+            var overrideButton = document.getElementById('overrideButton');
+            
+            driverName.readOnly = false;
+            overrideButton.style.visibility="hidden";
+        }
+     </script>  
+     <button id="overrideButton" onclick="overrideActive()" ">Try it</button>
          <script type="text/javascript">
     selected = new Array()
     names = new Array()

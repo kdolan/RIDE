@@ -3,8 +3,16 @@ require_once("func.php");
 
 
 //Store username in variable
-   //Get from webauth
-   $userName = $_SERVER['WEBAUTH_USER'];  
+   //Get driverName from webauth or textbox if user is admin 
+   if(isAdmin())
+   {
+      $driverName= queryName(secureInput($_POST['driverName']));
+   }
+   else
+   {
+       $driverName = $_SERVER['WEBAUTH_USER'];  
+   }
+   
 //connect to Db
 connectToDb();   
  
@@ -60,7 +68,7 @@ $passengers = $_POST['passegers'];
 
 
         $query="INSERT INTO `kevin_ride`.`rideList` (`id`, `eventId`, `carId`, `isTent`, `tentName`, `driverName`, `comments`, `depatrueTime`, `seatsAvailable`) 
-        VALUES ($id, '$eventId', '$carId', '0', 'NA', '$userName', '$comments', '$departDate', '$seatsAvaliable');";
+        VALUES ($id, '$eventId', '$carId', '0', 'NA', '$driverName', '$comments', '$departDate', '$seatsAvaliable');";
 
         //echo $query;
 
