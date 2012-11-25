@@ -1,9 +1,17 @@
 <?php
 require_once("func.php");
 
+//verify web-auth
+
+//Store username in variable
+   //Then replace DB_USR in query
+   $userName = $_SERVER['WEBAUTH_USER']; 
+
+
    //connect to Db
 connectToDb(); 
 
+ 
 //getVars
  $eventName = secureInput($_POST['eventName']);
  $description = secureInput($_POST['description']);
@@ -14,26 +22,6 @@ connectToDb();
  $endTime = secureInput($_POST['endTime']);
  
  $eventId = secureInput($_POST['eventId']);
- 
- //Store username in variable
-   //getUsername
-  if(isAdmin())
-   {
-      $userName= queryName(secureInput($_POST['driverName']));
-   }
-   else
-   {
-       $userName = $_SERVER['WEBAUTH_USER'];
-       //Permission error if user did not create this event
-       $query = "SELECT * FROM `eventList` WHERE `id`=$eventId AND `eventCreator` LIKE '$userName';";
-       $result = mysql_query($query);
-       if(mysql_num_rows($result)!=1)
-       {
-           //user did not create this ride. Permission error.
-           echo 'You do not have permission to edit this ride.';
-           die();
-       }  
-   }
  
 //echo $eventName." ".$description." ".$isCamping." ".$startDate." ".$startTime." ".$endDate." ".$endTime;  
 
@@ -61,26 +49,12 @@ else
     $isCamping=0;
 }
 
-if(isAdmin())
-{
-    //Does not include username verification
-      $query="UPDATE `kevin_ride`.`eventList` SET `eventName` = '$eventName',
+$query="UPDATE `kevin_ride`.`eventList` SET `eventName` = '$eventName',
 `description` = '$description',
 `isCamping` = '$isCamping',
 `depatrueStart` = '$startDate',
 `depatrueEnd` = '$endDate'
-WHERE `eventList`.`id`=$eventId;";  
-}
-else
-{
-  $query="UPDATE `kevin_ride`.`eventList` SET `eventName` = '$eventName',
-`description` = '$description',
-`isCamping` = '$isCamping',
-`depatrueStart` = '$startDate',
-`depatrueEnd` = '$endDate'
-WHERE `eventList`.`eventCreator` LIKE '$userName' AND `eventList`.`id`=$eventId;";  
-}
-
+WHERE `eventList`.`eventCreator` LIKE '$userName' AND `eventList`.`id`=$eventId;";
 
 //echo $query;
 

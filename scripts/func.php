@@ -36,19 +36,6 @@ function stripUsername($combinedName) //combinedName is in the format "Kevin Dol
     return $combinedName;
 }
 
-function isAdmin()
-{
-    connectToDb();
-    $username = $_SERVER['WEBAUTH_USER'];
-    $query = "SELECT * FROM `admin` WHERE `username`='$username'";
-    $adminQueryTable = mysql_query($query);
-    if(mysql_num_rows($adminQueryTable)==1)
-    {
-        return true;
-    }
-    return false;
-}
-
 function uxRedirect($edata='') 
 {
      connectToDb();
@@ -246,8 +233,6 @@ function printJoinRideButtons($eventId, $carId, $seatsAvail)
     $isPassenger = isUserAPassengerForThisRide($eventId, $carId,  $userName);
     $fullRide = false;
     
-    $isAdmin = isAdmin();
-    
     if($seatsAvail==0)
     {
         $fullRide = true;
@@ -256,10 +241,6 @@ function printJoinRideButtons($eventId, $carId, $seatsAvail)
     if($canJoinRides && $fullRide==false ){
         //print Join Ride Button
         echo '<a class="btn btn-primary" href="scripts/sJoinRide.php?eventId='.$eventId.'&carId='.$carId.'">Join Ride &raquo;</a>';
-        if($isAdmin)
-        {
-        echo '<a class="btn btn-warning" href="createRide.php?edit=1&eventId='.$eventId.'&carId='.$carId.       '">*Edit Ride* &raquo;</a>' ; 
-        }
     }
     elseif($createdRide)
     {
@@ -270,33 +251,17 @@ function printJoinRideButtons($eventId, $carId, $seatsAvail)
     {
         //Print Cancel Ride button    
          echo '<a class="btn btn-danger" href="scripts/sCancelRide.php?eventId='.$eventId.'&carId='.$carId.'">Cancel Ride &raquo;</a>';
-        if($isAdmin)
-        {
-            echo '<a class="btn btn-warning" href="createRide.php?edit=1&eventId='.$eventId.'&   carId='.$carId.       '">*Edit Ride* &raquo;</a>' ; 
-        }
     }
     elseif($fullRide)
     {  
         //Print Ride Full Button
         echo '<a class="btn disabled">Ride Full</a> ';
-        if($isAdmin)
-        {
-            echo '<a class="btn btn-warning" href="createRide.php?edit=1&eventId='.$eventId.'&   carId='.$carId.       '">*Edit Ride* &raquo;</a>' ; 
-        }
     }
     else
     {
       
         //Print no action button
-        if($isAdmin)
-        {
-        echo '<a class="btn btn-warning" href="createRide.php?edit=1&eventId='.$eventId.'&   carId='.   $carId.       '">*Edit Ride* &raquo;</a>' ; 
-        }
-        else
-        {
-            echo '<a class="btn disabled">No Actions</a> ';  
-        }
-        
+        echo '<a class="btn disabled">No Actions</a> ';  
     }
     
 }
@@ -437,11 +402,7 @@ function printJoinRideTable($eventId, $selTent)
         echo '</td>'; 
         if($event['eventCreator']==$userName) {  
             echo '<td><a class="btn btn-info" href="createEvent.php?eventId='.$eventId.'&edit=1">Edit Event &raquo;</a></td>';        
-                }
-        elseif(isAdmin())
-        {
-            echo '<td><a class="btn btn-info" href="createEvent.php?eventId='.$eventId.'&edit=1">*Edit Event* &raquo;</a></td>';  
-        }     
+                }     
        echo '</tr>
       </table>';
       

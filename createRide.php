@@ -236,20 +236,7 @@
           <legend><?php if($_GET['edit']==1) {echo "Editing Ride ~ ".$event['eventName'];} else {echo 'Createing a Ride ~ '.$event['eventName'];} ?>:</legend>
           
           <label>Driver Name </label>
-          <input type="text" value="<?php 
-          if($_GET['edit']==1) {
-              echo queryUsername($ride['driverName']);
-          }
-          else{ 
-              echo queryUsername($_SERVER['WEBAUTH_USER']);
-          }
-            ?>" id="driverName" name="driverName" readonly>
-          <?php 
-          if(isAdmin())
-          {
-              echo '<button id="overrideButton" class="btn btn-warning" onclick="overrideActive()" type="button">Override Driver</button>';  
-          }
-          ?>
+          <input type="text" value="<?php echo queryUsername($_SERVER['WEBAUTH_USER']); ?>" name="driverName" readonly>
           <span class="help-block">Valid Departure Window: <?php echo (date('D M d \a\t h:i A',$eventDepartStartTimeStamp)); ?> <em>to</em> 
 		  <?php 
 		  				if( date('D M d',$eventDepartStartTimeStamp) == date('D M d',$eventDepartEndTimeStamp ) )
@@ -428,23 +415,7 @@
 			
 		}
 	  </script>
-      <?php 
-          if(isAdmin())
-          {
-              echo '      
-              <script type="text/javascript">
-                    function overrideActive()
-                    {
-                        var driverName = document.getElementById(\'driverName\');
-                        var overrideButton = document.getElementById(\'overrideButton\');
-                        
-                        driverName.readOnly = false;
-                        overrideButton.style.visibility="hidden";
-                    }
-              </script>';
-          }
-      ?>
-
+      
       <script type="text/javascript">
         $(document).ready(function () { 
             $('.timepicker-default').timepicker();

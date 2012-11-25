@@ -7,23 +7,7 @@ require_once("func.php");
   $carId = secureInput($_GET['carId']);
   
   //getUsername
-  if(isAdmin())
-   {
-      $driverName= queryName(secureInput($_POST['driverName']));
-   }
-   else
-   {
-       $driverName = $_SERVER['WEBAUTH_USER'];
-       //Permission error if user did not create this ride
-       $query = "SELECT * FROM `rideList` WHERE `eventId`=$eventId AND `carId`=$carId AND `driverName` LIKE '$driverName';";
-       $result = mysql_query($query);
-       if(mysql_num_rows($result)!=1)
-       {
-           //user did not create this ride. Permission error.
-           echo 'You do not have permission to edit this ride.';
-           die();
-       }  
-   }
+  $userName = $_SERVER['WEBAUTH_USER'];
   
   //Remove from passenger table
   

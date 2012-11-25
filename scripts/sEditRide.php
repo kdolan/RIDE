@@ -1,13 +1,17 @@
 <?php
 require_once("func.php");
 
-  
+
+//Store username in variable
+    //Get from webauth
+   $userName = $_SERVER['WEBAUTH_USER']; 
 
 //connect to Db
 connectToDb();   
  
 //getVars
  $eventId = secureInput($_POST['eventId']);
+ $driverName = secureInput($_POST['driverName']);
  $departDate = secureInput($_POST['departDate']);
  $departTime = secureInput($_POST['departTime']);
  $comments = secureInput($_POST['comments']);
@@ -17,26 +21,6 @@ connectToDb();
 //$passengers = $_POST['passengers[]'][2];
 // echo $driverName."<br>";
 //echo "Passengers: ".$passengers;
-
-//Store username in variable
-   //Get driverName from webauth or textbox if user is admin 
-   if(isAdmin())
-   {
-      $driverName= queryName(secureInput($_POST['driverName'])); 
-   }
-   else
-   {
-       $driverName = $_SERVER['WEBAUTH_USER'];
-       //Permission error if user did not create this ride
-       $query = "SELECT * FROM `rideList` WHERE `eventId`=$eventId AND `carId`=$carId AND `driverName` LIKE '$driverName';";
-       $result = mysql_query($query);
-       if(mysql_num_rows($result)!=1)
-       {
-           //user did not create this ride. Permission error.
-           echo 'You do not have permission to edit this ride.';
-           die();
-       }  
-   }
 
 $passengers = $_POST['passegers']; //get array of passengers.
  
@@ -57,9 +41,8 @@ $passengers = $_POST['passegers']; //get array of passengers.
 
         $query="UPDATE `kevin_ride`.`rideList` SET
             `comments` = '$comments',
-            `driverName` = '$driverName',
             `depatrueTime` = ' $departDate',
-            `seatsAvailable` = '$seatsAvaliable' WHERE `rideList`.`eventId` =$eventId AND `rideList`.`carId`=$carId;" ;
+            `seatsAvailable` = '$seatsAvaliable' WHERE `rideList`.`eventId` =$eventId AND `rideList`.`carId`=$carId AND `rideList`.`driverName` LIKE '$driverName';" ;
 
         //echo $query;
 

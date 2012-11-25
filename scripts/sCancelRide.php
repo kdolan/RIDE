@@ -10,6 +10,7 @@ require_once("func.php");
   $eventId = secureInput($_GET['eventId']);
   $carId = secureInput($_GET['carId']);
   
+  //getUsername
   $userName = $_SERVER['WEBAUTH_USER'];
   
   //Remove from passenger table
