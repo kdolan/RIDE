@@ -1,9 +1,4 @@
-<?php 
-   require_once("scripts/func.php"); 
-   require_once("scripts/funcUserDetails.php");
-   connectToDb();  
-   //curPageURL();
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +28,12 @@
   </head>
 
   <body>
-
+          <?php 
+               require_once("scripts/func.php"); 
+			   require_once("scripts/funcUserDetails.php");
+			   connectToDb();  
+               //curPageURL();
+          ?>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -67,18 +67,14 @@
           <p>Rides Taken: <?php echo getRidesTaken(); ?></p> 
         </div>
         <div class="span5">
-          <h2>Your Active Events</h2>
+          <h2>Your Events</h2>
           <?php print printUserEvents(); ?>
           <p></p>
         </div>
-      <div class="span10">
-        <h2> Status of Your Active Events</h2>
-        <?php printDetailsOFUserEvents(); ?>
-      </div>
-      </div>  
-      </div>
 
-        <!--<table class="table table-condensed">
+      <div class="span10">
+        <h2> Status of Your Events</h2>
+        <table class="table table-condensed">
           <thead>
             <tr>
               <th width="3%">#</th>
@@ -128,10 +124,9 @@
           </tbody>
         </table>
       </div>
-      </div>  
       </div>
-           -->
-           
+      </div>
+
       <!-- Example row of columns -->
       <hr>
 
@@ -139,7 +134,7 @@
         <p>Created by Kevin J Dolan</p>
       </footer>
 
-    </div>  <!-- /container -->
+    </div> <!-- /container -->
 
     <!-- Le javascript
     ================================================== -->
