@@ -23,12 +23,10 @@ Planned Features and Fixes
 	* Improve superbar usibility.
 * Features
 	* Add camping support. (Framework already in pace just need to setup the backend.)
-	* Complete User Details page 
-	* (x)Admin support.
-	* Create page for people to take people from the need ride section. 
+	* (x)Complete User Details page 
+	* (x)Admin Support
+	* Create page for people to take people from the need ride section.
 * Backend
 	* (x)Functions usernameToName and nameToUsername
+	* (x)Ldap integration
 	* When user is added to a ride and they are listed as needing a ride remove them from need ride and add them to the ride. Send notification.
-	* Notifications when user is added to a ride, removed from a ride, or a ride is canceled.
-	
-	

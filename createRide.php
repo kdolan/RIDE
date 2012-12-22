@@ -247,7 +247,7 @@
           <?php 
           if(isAdmin())
           {
-              echo '<button id="overrideButton" class="btn btn-warning" onclick="overrideActive()" type="button">Override Driver</button>';  
+              echo '<button id="overrideButton" class="btn btn-warning" onclick="overrideActive()" type="button">*Override Driver*</button>';  
           }
           ?>
           <span class="help-block">Valid Departure Window: <?php echo (date('D M d \a\t h:i A',$eventDepartStartTimeStamp)); ?> <em>to</em> 
