@@ -1,6 +1,6 @@
 <?php
-	require_once("scripts/func.php");
-	connectToDb();
+    require_once("scripts/func.php");
+    connectToDb();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="../bootstrap/timepicker/compiled/timepicker.css" type="text/css" rel="stylesheet" />
     <link href="../bootstrap/datepicker/css/datepicker.css" rel="stylesheet">
     <style type="text/css">
@@ -21,7 +21,7 @@
         padding-bottom: 40px;
       }
     </style>
-    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -35,104 +35,7 @@
   </head>
 
   <body>
-         <script type="text/javascript">
-    selected = new Array()
-    names = new Array()
-    names.push("Chris Lockfort (clockfort)");
-    names.push("Gabbie Burns (yinyang)");
-    names.push("Will Ziener-Dignazio (slackwill)");
-    names.push("Ross Delinger (rossdylan)");
-    names.push("Grant Cohoe (cohoe)");
-    names.push("Ross Guarino (eos)");
-    names.push("Channon Price (chprice)");
-    names.push("Matt Soucy (msoucy)");
-    names.push("Frank Hrach (knarf1393)");
-    names.push("Ethan House (ehouse)");
-    names.push("Benjamin Meyer (bmeyer)");
-    names.push("Ben Centra (bencentra)");
-    names.push("Joshua Winemiller (jewinemiller21)");
-    names.push("Travis Whitaker (tmobile)");
-    names.push("Andrew Hanes (ahanes)");
-    names.push("Michael Moffitt (moffitt)");
-    names.push("Julian Hammerstein (Hammerstein)");
-    names.push("Ryan S Brown (ryansb)");
-    names.push("Drew Stebbins (astebbin)");
-    names.push("Gerard Geer (gman)");
-    names.push("Eric Adams (grizzlyadams)");
-    names.push("John Feulner (peppy)");
-    names.push("Sarah Clauser (sclauser)");
-    names.push("Duncan Keller (duncannons)");
-    names.push("Cliff Chapman (mrdoom)");
-    names.push("Anqi Chen (totoro)");
-    names.push("Megan McNeice (mmcneice)");
-    names.push("Michail Yasonik (gorbachev)");
-    names.push("Alex Berkowitz (berky93)");
-    names.push("Emily Egeland (ducktape)");
-    names.push("Alex Walcutt (awalcutt)");
-    names.push("Josh McSavaney (mcsaucy)");
-    names.push("Daniel Tyler (dtyler)");
-    names.push("Dan Fuhry (fuhry)");
-    names.push("Anthony Gargiulo (agargiulo)");
-    names.push("Russ Harmon (russ)");
-    names.push("Benjamin Russell (benrr101)");
-    names.push("Jeff Haak (zemon1)");
-    names.push("Will Orr (worr)");
-    names.push("Grant Kurtz (grnt426)");
-    names.push("Connor Monahan (kerberos)");
-    names.push("Alex Howland (ducker)");
-    names.push("Michael Bax Bradley (mike5)");
-    names.push("Nikko Williard (urfriendlyvirus)");
-    names.push("Peter Vowell (caliswag)");
-    names.push("Alexander Kyte (alexanderkyte)");
-    names.push("Reed Swiernik (rswiernik)");
-    names.push("Dan Brockwell (dbrocks)");
-    names.push("Mike Janitor (thejanitor)");
-    names.push("Michael Swan (swanboy)");
-    names.push("Michael A. Wilmoth (leroyflyer)");
-    names.push("f_MeghanSchafer (f_MeghanSchafer)");
-    names.push("Jacqueline McGraw (jackiedmcgraw)");
-    names.push("Ross Bayer (rostepher)");
-    names.push("Schuyler Martin (skyguysciguy)");
-    names.push("Matthew Lavine (mattlavine)");
-    names.push("Nick Depinet (nick)");
-    names.push("Michael G. Cunney (kanye)");
-    names.push("Kevin Dolan (kdolan)");
-    names.push("f_TroyCaro (f_TroyCaro)");
-    names.push("Andrew Glaude (ajgajg1134)");
-    names.push("Tyler Cromwell (tyler)");
-    names.push("Joseph Batchik (jd)");
-    names.push("Matt Gambogi (gambogi)");
-    names.push("Stephen Demos (demos)");
-    names.push("Derek Gonyeo (dgonyeo)");
-    names.push("f_ColinMurphy (f_ColinMurphy)");
-    names.push("f_DavidKisluk (f_DavidKisluk)");
-    names.push("f_JasonNoll (f_JasonNoll)");
-    names.push("f_ColtonSurdyk (f_ColtonSurdyk)");
-    names.push("f_AndrewWood (f_AndrewWood)");
-    names.push("f_CorySollberger (f_CorySollberger)");
-    names.push("Robert Glossop (robgssp)");
-    names.push("f_JayNdow (f_JayNdow)");
-    names.push("f_ShawWinner (f_ShawWinner)");
-    names.push("f_DerekCloos (f_DerekCloos)");
-    names.push("f_DavidSeidman (f_DavidSeidman)");
-    names.push("f_NathanielFalcone (f_NathanielFalcone)");
-    names.push("f_PeterGilosa (f_PeterGilosa)");
-    names.push("Nick Hilton (hilton)");
-    names.push("Tal Cohen (tcohen)");
-    names.push("f_MichaelEaton (f_MichaelEaton)");
-    names.push("f_JoshuaHampton (f_JoshuaHampton)");
-    names.push("Ryan Buzzell (rbuzzell)");
-    names.push("Austin Levesque (austinlvsq)");
-    names.push("Matthew Rose (cobert)");
-    names.push("Julien Eid (jeid)");
-    names.push("Sophie Song (sophiesong)");
-    names.push("Scott Jordan (swinejelly)");
-    names.push("Jennifer Dziuba (candy)");
-    names.push("f_NateLemoi (f_NateLemoi)");
-    names.push("f_ShareefAli (f_ShareefAli)");
-    names.push("f_JoeGambino (f_JoeGambino)");
-    names.push("f_ColinONeill (f_ColinONeill)");
-</script>   <!--Insert DB wrapper here -->
+         <?php printSuperbarArray();?>  <!--Insert DB wrapper here -->
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -198,64 +101,77 @@
       ?>
       
       <?php
-	  	$eventId = $_GET['eventId'];
-		$carId = $_GET['carId'];
-		
-	  	$query = "SELECT * FROM `eventList` WHERE `eventList`.`id` = $eventId";
-		$eventTable = mysql_query($query);
-		$event = mysql_fetch_array( $eventTable );
-		
-		$eventDepartStart = $event['depatrueStart'];
-		$eventDepartStartTimeStamp = strtotime($eventDepartStart);
-		
-		$eventDepartEnd = $event['depatrueEnd'];
-		$eventDepartEndTimeStamp = strtotime($eventDepartEnd);
-	
-		if($_GET['edit']==1)
-		{
-			//get info from database for form fields
-			
-			$query = "SELECT * FROM `rideList` WHERE `rideList`.`eventId` = $eventId AND `rideList`.`carId`=$carId";
-			//echo $query;
-			$rideTable = mysql_query($query);
-			$ride = mysql_fetch_array( $rideTable );
-			
-			$departureDateTime = $ride['depatrueTime'];
-			$departureTimeStamp = strtotime($departureDateTime);
-			//echo $departureTimeStamp;
-			
-			$departureDate = date("m-d-Y",$departureTimeStamp);
-			$departureTime = date("h:i A",$departureTimeStamp);
+          $eventId = $_GET['eventId'];
+        $carId = $_GET['carId'];
+        
+          $query = "SELECT * FROM `eventList` WHERE `eventList`.`id` = $eventId";
+        $eventTable = mysql_query($query);
+        $event = mysql_fetch_array( $eventTable );
+        
+        $eventDepartStart = $event['depatrueStart'];
+        $eventDepartStartTimeStamp = strtotime($eventDepartStart);
+        
+        $eventDepartEnd = $event['depatrueEnd'];
+        $eventDepartEndTimeStamp = strtotime($eventDepartEnd);
+    
+        if($_GET['edit']==1)
+        {
+            //get info from database for form fields
+            
+            $query = "SELECT * FROM `rideList` WHERE `rideList`.`eventId` = $eventId AND `rideList`.`carId`=$carId";
+            //echo $query;
+            $rideTable = mysql_query($query);
+            $ride = mysql_fetch_array( $rideTable );
+            
+            $departureDateTime = $ride['depatrueTime'];
+            $departureTimeStamp = strtotime($departureDateTime);
+            //echo $departureTimeStamp;
+            
+            $departureDate = date("m-d-Y",$departureTimeStamp);
+            $departureTime = date("h:i A",$departureTimeStamp);
 
-			 	
-		}
-	  ?>
+                 
+        }
+      ?>
         <form id="ride" ACTION=<?php if($_GET['edit']==1) {echo "scripts/sEditRide.php";}else{echo 'scripts/sCreateRide.php';} ?> method="post" onsubmit="return false;">
          <input type="hidden" name="eventId" value="<?php echo $eventId;?>">
          <input type="hidden" name="carId" value="<?php echo $carId;?>"> 
           <legend><?php if($_GET['edit']==1) {echo "Editing Ride ~ ".$event['eventName'];} else {echo 'Createing a Ride ~ '.$event['eventName'];} ?>:</legend>
           
           <label>Driver Name </label>
-          <input type="text" value="<?php echo queryUsername($_SERVER['WEBAUTH_USER']); ?>" name="driverName" readonly>
+          <input type="text" value="<?php 
+          if($_GET['edit']==1) {
+              echo queryUsername($ride['driverName']);
+          }
+          else{ 
+              echo queryUsername($_SERVER['WEBAUTH_USER']);
+          }
+            ?>" id="driverName" name="driverName" readonly>
+          <?php 
+          if(isAdmin())
+          {
+              echo '<button id="overrideButton" class="btn btn-warning" onclick="overrideActive()" type="button">*Override Driver*</button>';  
+          }
+          ?>
           <span class="help-block">Valid Departure Window: <?php echo (date('D M d \a\t h:i A',$eventDepartStartTimeStamp)); ?> <em>to</em> 
-		  <?php 
-		  				if( date('D M d',$eventDepartStartTimeStamp) == date('D M d',$eventDepartEndTimeStamp ) )
-						{
-							echo (date('h:i A',$eventDepartEndTimeStamp )); 
-						}
-						else
-						{
-							echo date('D M d \a\Ft h:i A',$eventDepartEndTimeStamp);	
-						}
-						
-		  ?></span>
+          <?php 
+                          if( date('D M d',$eventDepartStartTimeStamp) == date('D M d',$eventDepartEndTimeStamp ) )
+                        {
+                            echo (date('h:i A',$eventDepartEndTimeStamp )); 
+                        }
+                        else
+                        {
+                            echo date('D M d \a\Ft h:i A',$eventDepartEndTimeStamp);    
+                        }
+                        
+          ?></span>
       <label>Departure Date 
        
       </label>
-			  <div class="input-append date" id="dp3" data-date="<?php if($_GET['edit']==1) {echo (date('m-d-Y',$departureTimeStamp));} else {echo (date('m-d-Y'));} ?>" data-date-format="mm-dd-yyyy">
-				<input class="span2" size="16" type="text" value="<?php if($_GET['edit']==1) {echo (date('m-d-Y',$departureTimeStamp));} else {echo (date('m-d-Y'));} ?>"  readonly name="departDate">
-				<span class="add-on"><i class="icon-th"></i></span>
-			  </div>
+              <div class="input-append date" id="dp3" data-date="<?php if($_GET['edit']==1) {echo (date('m-d-Y',$departureTimeStamp));} else {echo (date('m-d-Y'));} ?>" data-date-format="mm-dd-yyyy">
+                <input class="span2" size="16" type="text" value="<?php if($_GET['edit']==1) {echo (date('m-d-Y',$departureTimeStamp));} else {echo (date('m-d-Y'));} ?>"  readonly name="departDate">
+                <span class="add-on"><i class="icon-th"></i></span>
+              </div>
           <label>Departure Time </label>
 <div class="input-append bootstrap-timepicker-component">
   <input type="text" class="timepicker-1 input-small" name="departTime">
@@ -285,15 +201,21 @@
 
                         $passenger =  mysql_fetch_array( $passengers );
                         $passengerName = $passenger['passengerName'];
+                        $passengerFullName = queryUsername($passengerName);
+                        if($passengerFullName=="username_query_returns_null")
+                        {
+                            $passengerFullName = $passenger['passengerName'];
+                        }
+                        
                         if($passengerName != '')
                         {
                                 if(!$printedFormating)
                                 {
                                    echo '<div id="staticPassemgers" style="margin-left:15px" > 
-                                <label>Current Passenger</label> ';
+                                <label>Current Passengers</label> ';
                                     $printedFormating = true; 
                                 }
-                               echo '<input type="text" readonly placeholder="Passenger Name" value="'.queryUsername($passengerName).'" name="na" > 
+                               echo '<input type="text" readonly placeholder="Passenger Name" value="'.$passengerFullName.'" name="na" > 
                             <a class="btn btn-danger" href="scripts/sRemovePassenger.php?eventId='.$eventId.'&carId='.$carId.'&passengerName='.$passengerName.'">Remove Passenger</a><br>';
                             $numberOfCurrentPassengers++;
                             
@@ -309,9 +231,10 @@
            ?>   
            
              <div id="dynamicInput" style="margin-left:15px" >
+
              
              <?php 
-			 	    
+                     
                      if($_GET['edit']==1) 
                      {    
                         $counterAddPassengers = 0 ;
@@ -323,7 +246,10 @@
                             if($passengerName == '')
                             {
                                    //echo '<label>Add Passenger</label><input type="text" placeholder="Passenger Name" name="passegers[]" ><br>'; 
-                                   echo '<label>Add Passenger</label>'."<input type=\"text\" class=\"superbar\" id=\"superbar".$counterAddPassengers."\" onkeyup=\"search('superbar".$counterAddPassengers."', event, addSelected);\" placeholder='Passenger Name' name='passegers[]'/>".'<br>';       
+                                   echo '<label>Add Passenger</label>'."<input type=\"text\" autocomplete=\"off\" class=\"superbar\" id=\"superbar".$counterAddPassengers."\" onfocus=\"setDivId('results".$counterAddPassengers."')\" onblur=\"hideResults()\" onkeyup=\"search('superbar".$counterAddPassengers."', event, addSelected);\" placeholder='Passenger Name' name='passegers[]'/>".'<br>'; 
+                                   echo '<div id="results'.$counterAddPassengers.'" class="results">
+                 
+                                 </div> ';
                             }
                             $counterAddPassengers++;
                         } 
@@ -331,22 +257,25 @@
                      else
                      {
                         $numberOfCurrentPassengers = 0;
-                        echo '<label>Add Passenger</label>'."<input type=\"text\" class=\"superbar\" id=\"superbar1\" onkeyup=\"search('superbar1', event, addSelected);\" placeholder='Passenger Name' name='passegers[]'/>".'<br>';
-                        echo '<label>Add Passenger</label>'."<input type=\"text\" class=\"superbar\" id=\"superbar2\" onkeyup=\"search('superbar2', event, addSelected);\" placeholder='Passenger Name' name='passegers[]'/>".'<br>';
-                        echo '<label>Add Passenger</label>'."<input type=\"text\" class=\"superbar\" id=\"superbar3\" onkeyup=\"search('superbar3', event, addSelected);\" placeholder='Passenger Name' name='passegers[]'/>".'<br>';
+                        echo '<label>Add Passenger</label>'."<input type=\"text\" autocomplete=\"off\" class=\"superbar\" id=\"superbar1\" onfocus=\"setDivId('results1')\" onblur=\"hideResults()\" onkeyup=\"search('superbar1', event, addSelected);\" placeholder='Passenger Name' name='passegers[]'/>".'<br>';
+                        echo '<div id="results1" class="results">
+                 
+                                 </div> ';
+                        echo '<label>Add Passenger</label>'."<input type=\"text\" autocomplete=\"off\" class=\"superbar\" id=\"superbar2\" onfocus=\"setDivId('results2')\" onblur=\"hideResults()\" onkeyup=\"search('superbar2', event, addSelected);\" placeholder='Passenger Name' name='passegers[]'/>".'<br>';
+                        echo '<div id="results2" class="results">
+                 
+                                 </div> ';
+                        echo '<label>Add Passenger</label>'."<input type=\"text\" autocomplete=\"off\" class=\"superbar\" id=\"superbar3\" onfocus=\"setDivId('results3')\" onblur=\"hideResults()\" onkeyup=\"search('superbar3', event, addSelected);\" placeholder='Passenger Name' name='passegers[]'/>".'<br>';
+                        echo '<div id="results3" class="results">
+                 
+                        </div> ';
                         //echo '<label>Add Passenger</label><input type="text" placeholder="Passenger Name" name="passegers[]" ><br>';
                         //echo '<label>Add Passenger</label><input type="text" placeholder="Passenger Name" name="passegers[]" ><br>';
                         
 
                      }
-			?>
+            ?>
            </div>
-           <div id="results" class="results">
-                 
-                                 <div id="results" class="results">
-                                 
-                                 </div>
-                                 </div>
           <button type="button" onclick="document.forms[0].submit();" class="btn btn-<?php if($_GET['edit']==1) {echo "info";} else {echo 'primary';} ?> btn-large"><?php if($_GET['edit']==1) {echo "Edit";} else {echo 'Create';} ?> Ride&raquo;</button>
           <?php if($_GET['edit']==1) { echo '<a class="btn btn-danger btn-large" href="scripts/sCancelFullRide.php?eventId='.$eventId.'&carId='.$carId.'">Cancel Ride &raquo;</a>';} ?>
 </form>
@@ -380,16 +309,16 @@
       <script src="../bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
 
       <script type="text/javascript">
-			
-			var limit = 12;
+            
+            var limit = 12;
             var peopleOnRide = <?php echo $numberOfCurrentPassengers.';'; ?>
-			function addInput(divName, number) {
-			 if (number > limit) {
-				  alert("The max number of people in one car is "+limit+". Unless we have a new party bus >:)");
-				  var seats = document.getElementById("seatsAvaliable");
-				  seats.value = "12";
-				  number = 12
-			 }
+            function addInput(divName, number) {
+             if (number > limit) {
+                  alert("The max number of people in one car is "+limit+". Unless we have a new party bus >:)");
+                  var seats = document.getElementById("seatsAvaliable");
+                  seats.value = "12";
+                  number = 12
+             }
              if (number < 1) {
                   var seats = document.getElementById("seatsAvaliable");
                   seats.value = "1";
@@ -399,23 +328,40 @@
                   var seats = document.getElementById("seatsAvaliable");
                   seats.value = peopleOnRide;
              }
-		 		var pa= document.getElementById(divName);
-				 while(pa.lastChild)pa.removeChild(pa.lastChild); //remove all Add Passenger text boxes.
-				 
-				 var count = peopleOnRide;
-				 while (count<number)
-				 {
-					  var newdiv = document.createElement('div');
+                 var pa= document.getElementById(divName);
+                 while(pa.lastChild)pa.removeChild(pa.lastChild); //remove all Add Passenger text boxes.
+                 
+                 var count = peopleOnRide;
+                 while (count<number)
+                 {
+                      var newdiv = document.createElement('div');
+                      countPlus1 = count + 1;
                       
-					  newdiv.innerHTML = "<label>Add Passenger</label><input type=\"text\" class=\"superbar\" id=\"superbar"+count+"\" onkeyup=\"search('superbar"+count+"', event, addSelected);\" placeholder='Passenger Name' name='passegers[]'/>";  //"Add Passenger <br><input type='text' placeholder='Passenger Name' name='passegers[]'>";
-					  document.getElementById(divName).appendChild(newdiv);
-					  count++;
-				 }
+                      newdiv.innerHTML = "<label>Add Passenger</label><input type=\"text\" class=\"superbar\" id=\"superbar"+countPlus1+"\" autocomplete=\"off\" onfocus=\"setDivId('results"+countPlus1+"')\" onblur=\"hideResults()\" onkeyup=\"search('superbar"+countPlus1+"', event, addSelected);\" placeholder='Passenger Name' name='passegers[]'/> <div id=\"results"+countPlus1+"\" class=\"results\"></div>   ";  //"Add Passenger <br><input type='text' placeholder='Passenger Name' name='passegers[]'>";
+                      document.getElementById(divName).appendChild(newdiv);
+                      count++;
+                 }
 
-			
-		}
-	  </script>
-      
+            
+        }
+      </script>
+      <?php 
+          if(isAdmin())
+          {
+              echo '      
+              <script type="text/javascript">
+                    function overrideActive()
+                    {
+                        var driverName = document.getElementById(\'driverName\');
+                        var overrideButton = document.getElementById(\'overrideButton\');
+                        
+                        driverName.readOnly = false;
+                        overrideButton.style.visibility="hidden";
+                    }
+              </script>';
+          }
+      ?>
+
       <script type="text/javascript">
         $(document).ready(function () { 
             $('.timepicker-default').timepicker();
@@ -424,7 +370,7 @@
                 minuteStep: 1,
                 showSeconds: false,
                 showMeridian: true,
-				defaultTime: <?php if($_GET['edit']==1) {echo "'".$departureTime."'";} else {echo "'".(date('h:i A'))."'";} ?>
+                defaultTime: <?php if($_GET['edit']==1) {echo "'".$departureTime."'";} else {echo "'".(date('h:i A'))."'";} ?>
             });
 
             $('.timepicker-2').timepicker({
@@ -451,40 +397,40 @@
         });
     </script>
     <script>
-		$(function(){
-			window.prettyPrint && prettyPrint();
-			$('#dp1').datepicker({
-				format: 'mm-dd-yyyy'
-			});
-			$('#dp2').datepicker();
-			$('#dp3').datepicker();
-			
-			
-			var startDate = new Date(2012,1,20);
-			var endDate = new Date(2012,1,25);
-			$('#dp4').datepicker()
-				.on('changeDate', function(ev){
-					if (ev.date.valueOf() > endDate.valueOf()){
-						$('#alert').show().find('strong').text('The start date can not be greater then the end date');
-					} else {
-						$('#alert').hide();
-						startDate = new Date(ev.date);
-						$('#startDate').text($('#dp4').data('date'));
-					}
-					$('#dp4').datepicker('hide');
-				});
-			$('#dp5').datepicker()
-				.on('changeDate', function(ev){
-					if (ev.date.valueOf() < startDate.valueOf()){
-						$('#alert').show().find('strong').text('The end date can not be less then the start date');
-					} else {
-						$('#alert').hide();
-						endDate = new Date(ev.date);
-						$('#endDate').text($('#dp5').data('date'));
-					}
-					$('#dp5').datepicker('hide');
-				});
-		});
-	</script>
+        $(function(){
+            window.prettyPrint && prettyPrint();
+            $('#dp1').datepicker({
+                format: 'mm-dd-yyyy'
+            });
+            $('#dp2').datepicker();
+            $('#dp3').datepicker();
+            
+            
+            var startDate = new Date(2012,1,20);
+            var endDate = new Date(2012,1,25);
+            $('#dp4').datepicker()
+                .on('changeDate', function(ev){
+                    if (ev.date.valueOf() > endDate.valueOf()){
+                        $('#alert').show().find('strong').text('The start date can not be greater then the end date');
+                    } else {
+                        $('#alert').hide();
+                        startDate = new Date(ev.date);
+                        $('#startDate').text($('#dp4').data('date'));
+                    }
+                    $('#dp4').datepicker('hide');
+                });
+            $('#dp5').datepicker()
+                .on('changeDate', function(ev){
+                    if (ev.date.valueOf() < startDate.valueOf()){
+                        $('#alert').show().find('strong').text('The end date can not be less then the start date');
+                    } else {
+                        $('#alert').hide();
+                        endDate = new Date(ev.date);
+                        $('#endDate').text($('#dp5').data('date'));
+                    }
+                    $('#dp5').datepicker('hide');
+                });
+        });
+    </script>
 </body>
 </html>

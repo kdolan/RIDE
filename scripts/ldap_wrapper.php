@@ -40,7 +40,7 @@ class LdapWrapper {
         if( $results ) {
             $info = ldap_get_entries($this->ds, $results);
             if( $info["count"] == 0) {
-                return $username;
+                return "username_query_returns_null";
             }
             $retVal = addslashes($info[0]["cn"][0]);
             $retVal = str_replace("<", "&lt;", $retVal);
@@ -59,7 +59,7 @@ class LdapWrapper {
         if( $results ) {
             $info = ldap_get_entries($this->ds, $results);
             if( $info["count"] == 0) {
-                return $name."bad";
+                return "name_query_returns_null";
             }
             $retVal = addslashes($info[0]["uid"][0]);
             $retVal = str_replace("<", "&lt;", $retVal);

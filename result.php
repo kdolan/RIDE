@@ -9,14 +9,14 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
       body {<link rel="stylesheet" type="text/css" href="">
         padding-top: 60px;
         padding-bottom: 40px;
       }
     </style>
-    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>

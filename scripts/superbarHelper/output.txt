@@ -1,0 +1,5 @@
+<script type="text/javascript">
+selected = new Array()
+names = new Array()
+names.push("Firstname Lastname (username)")
+</script>

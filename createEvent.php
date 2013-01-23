@@ -13,7 +13,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="../bootstrap/timepicker/compiled/timepicker.css" type="text/css" rel="stylesheet" />
     <link href="../bootstrap/datepicker/css/datepicker.css" rel="stylesheet">
     <style type="text/css">
@@ -22,7 +22,7 @@
         padding-bottom: 40px;
       }
     </style>
-    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -123,7 +123,18 @@
         
         }
       
+
       ?>
+      <table class="table table-condensed" align="center" style="display:none;" id="pastWarning">
+          <tr class="warning">  
+        <td>Warning: Event Starts in past</td>
+          </tr>
+      </table>
+      <table class="table table-condensed" align="center" style="display:none;" id="endDateError">
+          <tr class="error">
+        <td>ERROR: End date cannot be before start date</td>
+          </tr>
+      </table>
         <form ACTION=<?php if($_GET['edit']==1) {echo "scripts/sEditEvent.php";}else{echo 'scripts/sCreateEvent.php';} ?> METHOD="post">
          <input type="hidden" name="eventId" value="<?php echo $event['id'];?>">  
           <legend>Creating An Event:</legend>
@@ -132,47 +143,48 @@
           <label>Description</label>
          <textarea rows="2" cols="20" name="description"><?php if($_GET['edit']==1) {echo $event['description'];}  ?></textarea>
          <label class="checkbox">
-                <input type="checkbox" name="campingTrip" <?php if($event['isCamping']==1){echo 'checked'; }?>>Camping Trip
+                <!--<input type="checkbox" name="campingTrip" <?php //if($event['isCamping']==1){echo 'checked'; }?>>Camping Trip
           </label>
-         <span class="help-block">Adds ability to create/join tents as well as rides. (Fall Camping)</span>
+         <span class="help-block">Adds ability to create/join tents as well as rides. (Fall Camping)</span>   -->
           <label><h5>Event Time: </h5></label>
           <div style="margin-left:15px"> <label>Event Start Time: </label> 
-              <div class="input-append date" id="dp2" data-date="<?php if($_GET['edit']==1) {echo (date('m-d-Y',$eventDepartStartTimeStamp));} else {echo (date('m-d-Y'));} ?>"data-date-format="mm-dd-yyyy">
-                    <input class="span2" size="16" type="text" value="<?php if($_GET['edit']==1) {echo (date('m-d-Y',$eventDepartStartTimeStamp));} else {echo (date('m-d-Y'));} ?>"  readonly name="startDate">
-                    <span class="add-on"><i class="icon-th"></i></span>
+              <div class="input-append date" onmouseover="validDates()"  id="dp2" data-date="<?php if($_GET['edit']==1) {echo (date('m-d-Y',$eventDepartStartTimeStamp));} else {echo (date('m-d-Y'));} ?>"data-date-format="mm-dd-yyyy">
+                    <input class="span2"  size="16" id="startDate" onchange="validDates()" onfocus="validDates()" type="text" value="<?php if($_GET['edit']==1) {echo (date('m-d-Y',$eventDepartStartTimeStamp));} else {echo (date('m-d-Y'));} ?>"  readonly name="startDate">
+                    <span class="add-on" ><i class="icon-th"></i></span>
                     </div>
                     <div class="input-append bootstrap-timepicker-component">
-                          <input type="text" class="timepicker-1 input-small" name="startTime">  
-                        <span class="add-on">
-                            <i class="icon-time"></i>
+                          <input type="text" onchange="validDates()" class="timepicker-1 input-small" name="startTime" id="startTime">  
+                        <span class="add-on" onmouseover="validDates()">
+                            <i class="icon-time" onmouseover="validDates()"></i>
                         </span>
                     </div>
                     
          </div>
 
      <div style="margin-left:15px"> <label>Event End Time: </label> 
-               <div class="input-append date" id="dp3" data-date="<?php if($_GET['edit']==1) {echo (date('m-d-Y',$eventDepartEndTimeStamp));} else { echo (date('m-d-Y')); }?>" data-date-format="mm-dd-yyyy">
-                    <input class="span2" size="16" type="text" value="<?php if($_GET['edit']==1) {echo (date('m-d-Y',$eventDepartEndTimeStamp));} else { echo (date('m-d-Y')); }?>"  readonly name="endDate">
+               <div class="input-append date" onmouseover="validDates()" onchange="validDates()" id="dp3" data-date="<?php if($_GET['edit']==1) {echo (date('m-d-Y',$eventDepartEndTimeStamp));} else { echo (date('m-d-Y')); }?>" data-date-format="mm-dd-yyyy">
+                    <input class="span2" size="16" type="text" id="endDate"  value="<?php if($_GET['edit']==1) {echo (date('m-d-Y',$eventDepartEndTimeStamp));} else { echo (date('m-d-Y')); }?>"  readonly name="endDate">
                     <span class="add-on"><i class="icon-th"></i></span>
                     </div>
                     <div class="input-append bootstrap-timepicker-component">
-                        <input type="text" class="timepicker-2 input-small" name="endTime">
-                        <span class="add-on">
-                            <i class="icon-time"></i>
+                        <input type="text" onchange="validDates()" class="timepicker-2 input-small" name="endTime" id="endTime">
+                        <span class="add-on" onmouseover="validDates()">
+                            <i class="icon-time" onmouseover="validDates()" ></i>
                         </span>
                     </div>
                     
          </div>
          <br>
      <div id="dynamicInput" style="margin-left:15px" ></div>
-           <button type="submit" class="btn btn-<?php if($_GET['edit']==1) {echo "info";} else {echo 'primary';} ?> btn-large"><?php if($_GET['edit']==1) {echo "Edit";} else {echo 'Create';} ?> Event&raquo;</button>
+           <button type="submit" id="submit1" onmouseover="validDates()" class="btn btn-<?php if($_GET['edit']==1) {echo "info";} else {echo 'primary';} ?> btn-large"><?php if($_GET['edit']==1) {echo "Edit";} else {echo 'Create';} ?> Event&raquo;</button>
           
 </form>
       </div>
 
      
       <hr>
-
+      <!--<input type="text" id="test">
+      <input type="button" onclick="validDates()" value="123">        -->
       <footer>
         <p>Created by Kevin J Dolan</p>
       </footer>
@@ -197,7 +209,64 @@
      <script src="../bootstrap/timepicker/js/bootstrap-timepicker.js"></script>
       <script src="../bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
       
-                                             <script type="text/javascript">
+      
+                                                                                       
+      <script type="text/javascript">
+      
+        function validDates()
+        {
+            var test =   document.getElementById("test"); 
+              
+            var submitButton = document.getElementById("submit1");
+             
+            var startDate = document.getElementById("startDate");
+            var startTime = document.getElementById("startTime");     
+            
+            var endDate = document.getElementById("endDate");
+            var endTime = document.getElementById("endTime"); 
+            
+            var pastWarning = document.getElementById("pastWarning");
+            var endDateError = document.getElementById("endDateError");   
+                                                                                      
+            var startDateTime = new Date(startDate.value+" "+startTime.value)
+            var endDateTime = new Date(endDate.value+" "+endTime.value)
+                
+            var today = new Date();
+             
+            if(endDateTime<startDateTime)
+            {
+                
+                pastWarning.style.display="none";
+                endDateError.style.display=""; 
+                submitButton.disabled=true;
+                
+            }
+            else if(startDateTime<today)
+            {
+                //past 
+                pastWarning.style.display="";
+                endDateError.style.display="none"; 
+                submitButton.disabled=false;
+            }
+            else
+            {
+                pastWarning.style.display="none";
+                endDateError.style.display="none"; 
+                submitButton.disabled=false;
+            }
+            
+        }
+      
+      </script>
+      
+      <?php
+       $date = new DateTime();
+       $currentTimeStamp =   $date->getTimestamp(); 
+       $prev = $date->getTimestamp() - ($date->getTimestamp() % 1800);
+       $currentTimeStamp = $prev + 1800;
+       
+      ?>
+     <script type="text/javascript">
         $(document).ready(function () { 
             $('.timepicker-default').timepicker();
 
@@ -267,6 +336,7 @@
                     $('#dp5').datepicker('hide');
                 });
         });
+        
     </script>
 </body>
 </html>

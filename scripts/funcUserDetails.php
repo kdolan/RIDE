@@ -204,13 +204,31 @@
                                     while ($passenger =  mysql_fetch_array( $passengers )) 
                                     { 
                                           
-                                         if ($counter==0)
-                                        {                                          
-                                             echo queryUsername($passenger['passengerName']);             
+                                          if ($counter==0)
+                                        {     
+                                            $fullName = queryUsername($passenger['passengerName']);   
+                                            if($fullName=="username_query_returns_null")
+                                            {
+                                                echo $passenger['passengerName'];
+                                            }    
+                                            else
+                                            {
+                                                echo queryUsername($passenger['passengerName']);
+                                            }
+                                                                                   
                                         }
                                         else
                                         {    
-                                         echo ', '.queryUsername($passenger['passengerName']);     
+                                            $fullName = queryUsername($passenger['passengerName']);   
+                                            if($fullName=="username_query_returns_null")
+                                            {
+                                                echo ', '.$passenger['passengerName'];
+                                            }    
+                                            else
+                                            {
+                                                echo ', '.queryUsername($passenger['passengerName']); 
+                                            }
+                                              
                                               
                                         }
                                         //echo $counter; 

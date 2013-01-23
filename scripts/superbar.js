@@ -1,6 +1,11 @@
 var selected = new Array();
 var matches = new Array();
 var highlight_inx = 0;
+var divId = "results1"
+function setDivId(newDivID){
+	//window.alert(newDivID)
+	divId = newDivID;	
+}
 function contains(arr, obj){
     var i = arr.length;
     while(i--){
@@ -12,6 +17,7 @@ function contains(arr, obj){
 }
 function search(textId, e, handler) {
     search_text = document.getElementById(textId).value;
+	
     var max;
     matches = new Array();
     for(cur in names){
@@ -27,7 +33,7 @@ function search(textId, e, handler) {
             }
         }
         if( matches.length > 0) {
-            document.getElementById("results").style.display = "block";
+            document.getElementById(divId).style.display = "block";
         }
     }
     if( search_text != "") {
@@ -41,11 +47,13 @@ function search(textId, e, handler) {
         }
         switch( e.keyCode ) {
             case 13:
+				hideResults();
                 if( matches.length > highlight_inx) {
                     handler(textId, matches[highlight_inx]);
                     highlight_inx = 0;
-                    document.getElementById("results").style.display = "none";
+                    document.getElementById(divId).style.display = "none";
                 }
+
                 return;
                 break;
             case 38:
@@ -59,21 +67,21 @@ function search(textId, e, handler) {
                 }
                 break;
         }
-        document.getElementById("results").innerHTML = "";
+        document.getElementById(divId).innerHTML = "";
         if( (matches.length > 0) && (matches.length > (highlight_inx - 1))) {
             for(i=0; i < highlight_inx;i++){
-                document.getElementById("results").innerHTML += "<p class=\"dropdown\"\>" + matches[i] + "</p>\n";
+                document.getElementById(divId).innerHTML += "<p class=\"dropdown\"\>" + matches[i] + "</p>\n";
             }
             
-            document.getElementById("results").innerHTML += "<p class=\"dropdown\" style=\"background-color:#c7d7ff;\">" + matches[highlight_inx] + "</p>\n";
+            document.getElementById(divId).innerHTML += "<p class=\"dropdown\" style=\"background-color:#c7d7ff;\">" + matches[highlight_inx] + "</p>\n";
 
             for(i=(highlight_inx+1); i < max;i++){
-                document.getElementById("results").innerHTML += "<p class=\"dropdown\">" + matches[i] + "</p>\n";
+                document.getElementById(divId).innerHTML += "<p class=\"dropdown\">" + matches[i] + "</p>\n";
             }
         } 
     } else {
-        document.getElementById("results").innerHTML = "";
-        document.getElementById("results").style.display = "none";
+        document.getElementById(divId).innerHTML = "";
+        document.getElementById(divId).style.display = "none";
         highlight_inx = 0;
     }    
 }
@@ -94,6 +102,7 @@ function updateSelected(){
 function removeSelected(index) {
     Array.remove(selected, index, index);
     updateSelected();
+
 }
 
 function postValue(val) {
@@ -128,8 +137,8 @@ function postValue(val) {
 }
 
 function hideResults() {
-    if( document.getElementById("results") ) {
-        document.getElementById("results").style.display = "none";   
+    if( document.getElementById(divId) ) {
+        document.getElementById(divId).style.display = "none";   
     }
 }
 

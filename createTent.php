@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="../bootstrap/timepicker/compiled/timepicker.css" type="text/css" rel="stylesheet" />
     <link href="../bootstrap/datepicker/css/datepicker.css" rel="stylesheet">
     <style type="text/css">
@@ -18,7 +18,7 @@
         padding-bottom: 40px;
       }
     </style>
-    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>

@@ -14,6 +14,16 @@ require_once("func.php");
   //getUsername
   $userName = $_SERVER['WEBAUTH_USER'];
   
+  if($carId!=0)
+  {
+        if(fullRide($eventId,$carId))
+        {
+          header("location:../joinRide.php?ee=1&eventId=".$eventId);  
+          die();
+        }
+  }
+
+  
   //Add to passenger table
   
   //Get next avalibable ID

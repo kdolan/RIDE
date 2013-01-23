@@ -36,6 +36,109 @@ function stripUsername($combinedName) //combinedName is in the format "Kevin Dol
     return $combinedName;
 }
 
+function printSuperbarArray()
+{
+    $my_var = file_get_contents('https://eval.csh.rit.edu/api/members.php?active');
+    echo '<script type="text/javascript">
+        selected = new Array()
+        names = new Array()
+        names.push("Chris Lockfort (clockfort)")
+        names.push("Gabbie Burns (yinyang)")
+        names.push("Will Ziener-Dignazio (slackwill)")
+        names.push("Ross Delinger (rossdylan)")
+        names.push("Grant Cohoe (cohoe)")
+        names.push("Ross Guarino (eos)")
+        names.push("Channon Price (chprice)")
+        names.push("Matt Soucy (msoucy)")
+        names.push("Frank Hrach (knarf1393)")
+        names.push("Ethan House (ehouse)")
+        names.push("Benjamin Meyer (bmeyer)")
+        names.push("Ben Centra (bencentra)")
+        names.push("Joshua Winemiller (jewinemiller21)")
+        names.push("Travis Whitaker (tmobile)")
+        names.push("Andrew Hanes (ahanes)")
+        names.push("Michael Moffitt (moffitt)")
+        names.push("Julian Hammerstein (Hammerstein)")
+        names.push("Ryan S Brown (ryansb)")
+        names.push("Drew Stebbins (astebbin)")
+        names.push("Gerard Geer (gman)")
+        names.push("Eric Adams (grizzlyadams)")
+        names.push("John Feulner (peppy)")
+        names.push("Sarah Clauser (sclauser)")
+        names.push("Duncan Keller (duncannons)")
+        names.push("Cliff Chapman (mrdoom)")
+        names.push("Anqi Chen (totoro)")
+        names.push("Megan McNeice (mmcneice)")
+        names.push("Michail Yasonik (gorbachev)")
+        names.push("Alex Berkowitz (berky93)")
+        names.push("Emily Egeland (ducktape)")
+        names.push("Alex Walcutt (awalcutt)")
+        names.push("Josh McSavaney (mcsaucy)")
+        names.push("Daniel Tyler (dtyler)")
+        names.push("Dan Fuhry (fuhry)")
+        names.push("Anthony Gargiulo (agargiulo)")
+        names.push("Russ Harmon (russ)")
+        names.push("Benjamin Russell (benrr101)")
+        names.push("Jeff Haak (zemon1)")
+        names.push("Will Orr (worr)")
+        names.push("Grant Kurtz (grnt426)")
+        names.push("Connor Monahan (kerberos)")
+        names.push("Alex Howland (ducker)")
+        names.push("Andrew Glaude (ajgajg1134)")
+        names.push("Joseph Batchik (jd)")
+        names.push("Julien Eid (jeid)")
+        names.push("Kevin Dolan (kdolan)")
+        names.push("Michael A. Wilmoth (leroyflyer)")
+        names.push("Michael Bax Bradley (mike5)")
+        names.push("Ross Bayer (rostepher)")
+        names.push("Schuyler Martin (skyguysciguy)")
+        names.push("Stephen Demos (demos)")
+        names.push("Nikko Williard (urfriendlyvirus)")
+        names.push("Ryan Buzzell (rbuzzell)")
+        names.push("Jacqueline McGraw (jackiedmcgraw)")
+        names.push("Joseph Gambino (gambino)")
+        names.push("Matt Gambogi (gambogi)")
+        names.push("Michael G. Cunney (kanye)")
+        names.push("Mike Janitor (thejanitor)")
+        names.push("Reed Swiernik (rswiernik)")
+        names.push("Tal Cohen (tcohen)")
+        names.push("Derek Gonyeo (dgonyeo)")
+        names.push("Nick Hilton (hilton)")
+        names.push("Robert Glossop (robgssp)")
+        names.push("Michael Swan (swanboy)")
+        names.push("Scott Jordan (swinejelly)")
+        names.push("Sophie Song (sophiesong)")
+        names.push("Gregory Chambers (grg)")
+        names.push("Austin Levesque (austinlvsq)")
+        names.push("Samuel Lucidi (mansam)")
+        names.push("Henry Brown (spotdart)")
+        names.push("Matthew Rose (cobert)")
+        names.push("Keller Lewis (keller)")
+        names.push("Peter Vowell (caliswag)")
+        names.push("f_NateLemoi (f_NateLemoi)")
+        names.push("Shareef Ali (shareefalis)")
+        names.push("f_ColinONeill (f_ColinONeill)")
+        names.push("f_TylerCromwell (f_TylerCromwell)")
+        names.push("Nick Depinet (nick)")
+        names.push("Alexander Kyte (alexanderkyte)")
+        names.push("f_EliFerraro (f_EliFerraro)")
+        </script>';
+
+}
+
+function isAdmin()
+{
+    connectToDb();
+    $username = $_SERVER['WEBAUTH_USER'];
+    $query = "SELECT * FROM `admin` WHERE `username`='$username'";
+    $adminQueryTable = mysql_query($query);
+    if(mysql_num_rows($adminQueryTable)==1)
+    {
+        return true;
+    }
+    return false;
+}
+
 function uxRedirect($edata='') 
 {
      connectToDb();
@@ -59,8 +162,8 @@ function uxRedirect($edata='')
      }
      else
      {
-         if(strstr("selectEvent")!=false)
-         header("location:selectEvent.php?type=join&e=$edata");   
+         //if(strstr("selectEvent")!=false)
+         //header("location:selectEvent.php?type=join&e=$edata");   
      }
 }
 
@@ -218,6 +321,35 @@ function isUserListedAsNeedingRide($eventId,$userName)
     }
 }
 
+function fullRide($eventId, $carID)
+{
+    connectToDb();
+    $eventId = secureInput($eventId);
+    $carID = secureInput($carID);
+    $queryPassengers = "SELECT * FROM `passengers` WHERE `eventId` =$eventId AND `carId`=$carID";
+    $queryRide = "SELECT * FROM `rideList` WHERE `eventId` =$eventId AND `carId`=$carID";
+    //echo "    ".$queryPassengers."    ".$queryRide;
+    
+    //echo $queryPassengers;
+    
+    $passengerTable = mysql_query($queryPassengers);
+    $rideTable = mysql_query($queryRide);
+    
+    $numberOfPassengers = mysql_num_rows($passengerTable);
+    $ride = mysql_fetch_array($rideTable);
+    
+    $maxPassengers = $ride['seatsAvailable'];
+    if($maxPassengers<=$numberOfPassengers)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+    
+}
+
 
 function printJoinRideButtons($eventId, $carId, $seatsAvail)
 {
@@ -231,16 +363,18 @@ function printJoinRideButtons($eventId, $carId, $seatsAvail)
     $canJoinRides = isUserEligibleToJoinRide($eventId, $userName);
     $createdRide = didUserCreateRide($eventId,$userName, $carId);
     $isPassenger = isUserAPassengerForThisRide($eventId, $carId,  $userName);
-    $fullRide = false;
+    $fullRide = fullRide($eventId,$carId);
     
-    if($seatsAvail==0)
-    {
-        $fullRide = true;
-    }
+    $isAdmin = isAdmin();
+
     
     if($canJoinRides && $fullRide==false ){
         //print Join Ride Button
         echo '<a class="btn btn-primary" href="scripts/sJoinRide.php?eventId='.$eventId.'&carId='.$carId.'">Join Ride &raquo;</a>';
+        if($isAdmin)
+        {
+        echo '<a class="btn btn-warning" href="createRide.php?edit=1&eventId='.$eventId.'&carId='.$carId.       '">*Edit Ride* &raquo;</a>' ; 
+        }
     }
     elseif($createdRide)
     {
@@ -251,17 +385,33 @@ function printJoinRideButtons($eventId, $carId, $seatsAvail)
     {
         //Print Cancel Ride button    
          echo '<a class="btn btn-danger" href="scripts/sCancelRide.php?eventId='.$eventId.'&carId='.$carId.'">Cancel Ride &raquo;</a>';
+        if($isAdmin)
+        {
+            echo '<a class="btn btn-warning" href="createRide.php?edit=1&eventId='.$eventId.'&   carId='.$carId.       '">*Edit Ride* &raquo;</a>' ; 
+        }
     }
     elseif($fullRide)
     {  
         //Print Ride Full Button
         echo '<a class="btn disabled">Ride Full</a> ';
+        if($isAdmin)
+        {
+            echo '<a class="btn btn-warning" href="createRide.php?edit=1&eventId='.$eventId.'&   carId='.$carId.       '">*Edit Ride* &raquo;</a>' ; 
+        }
     }
     else
     {
       
         //Print no action button
-        echo '<a class="btn disabled">No Actions</a> ';  
+        if($isAdmin)
+        {
+        echo '<a class="btn btn-warning" href="createRide.php?edit=1&eventId='.$eventId.'&   carId='.   $carId.       '">*Edit Ride* &raquo;</a>' ; 
+        }
+        else
+        {
+            echo '<a class="btn disabled">No Actions</a> ';  
+        }
+        
     }
     
 }
@@ -281,9 +431,32 @@ function printNeedRideButton($eventId)
     
     //echo 'TESShh: '.$createdRide;
     
-    if($userHasRide or $createdRide)
+    if($userHasRide)
     {
           echo '<a class="btn disabled">No Actions</a> ';  
+    }
+    elseif($createdRide)
+    {
+        //Check to see if there are passengers who need ride
+        $checkQuery = "SELECT * FROM  `passengers` WHERE  `eventId` =$eventId AND  `carId` =0"; 
+        $result = mysql_query($checkQuery);
+        
+        //Get carId
+        $query = "SELECT * FROM `rideList` WHERE `eventId` =$eventId AND `driverName` LIKE '$userName'"; 
+        $rideResult = mysql_query($query);
+        $ride = mysql_fetch_array($rideResult);
+        $carId = $ride['carId'];
+         
+        if(mysql_num_rows($result)!=0 and fullRide($eventId, $carId)==false)
+        {
+        
+         echo '<a class="btn btn-primary" href="addPassengers.php?eventId='.$eventId.'&carId='.$carId.'">Add Passengers &raquo;</a>' ;  
+        }
+        else
+        {
+            echo '<a class="btn disabled">No Actions</a> '; 
+        }
+        
     }
     elseif($currentlyListedAsNeedsRide )
     {
@@ -402,7 +575,11 @@ function printJoinRideTable($eventId, $selTent)
         echo '</td>'; 
         if($event['eventCreator']==$userName) {  
             echo '<td><a class="btn btn-info" href="createEvent.php?eventId='.$eventId.'&edit=1">Edit Event &raquo;</a></td>';        
-                }     
+                }
+        elseif(isAdmin())
+        {
+            echo '<td><a class="btn btn-info" href="createEvent.php?eventId='.$eventId.'&edit=1">*Edit Event* &raquo;</a></td>';  
+        }     
        echo '</tr>
       </table>';
       
@@ -455,12 +632,30 @@ function printJoinRideTable($eventId, $selTent)
                                     { 
                                           
                                          if ($counter==0)
-                                        {                                          
-                                             echo queryUsername($passenger['passengerName']);             
+                                        {     
+                                            $fullName = queryUsername($passenger['passengerName']);   
+                                            if($fullName=="username_query_returns_null")
+                                            {
+                                                echo $passenger['passengerName'];
+                                            }    
+                                            else
+                                            {
+                                                echo queryUsername($passenger['passengerName']);
+                                            }
+                                                                                   
                                         }
                                         else
                                         {    
-                                         echo ', '.queryUsername($passenger['passengerName']);     
+                                            $fullName = queryUsername($passenger['passengerName']);   
+                                            if($fullName=="username_query_returns_null")
+                                            {
+                                                echo ', '.$passenger['passengerName'];
+                                            }    
+                                            else
+                                            {
+                                                echo ', '.queryUsername($passenger['passengerName']); 
+                                            }
+                                              
                                               
                                         }
                                         //echo $counter; 
@@ -491,14 +686,32 @@ function printJoinRideTable($eventId, $selTent)
                                     
                                       while ($passenger =  mysql_fetch_array( $passengersNeedRide )) 
                                     { 
-                                          
+
                                          if ($counter==0)
-                                        {                                          
-                                             echo queryUsername($passenger['passengerName']);               
+                                        {     
+                                            $fullName = queryUsername($passenger['passengerName']);   
+                                            if($fullName=="username_query_returns_null")
+                                            {
+                                                echo $passenger['passengerName'];
+                                            }    
+                                            else
+                                            {
+                                                echo queryUsername($passenger['passengerName']);
+                                            }
+                                                                                   
                                         }
                                         else
                                         {    
-                                         echo ', '.queryUsername($passenger['passengerName']);       
+                                            $fullName = queryUsername($passenger['passengerName']);   
+                                            if($fullName=="username_query_returns_null")
+                                            {
+                                                echo ', '.$passenger['passengerName'];
+                                            }    
+                                            else
+                                            {
+                                                echo ', '.queryUsername($passenger['passengerName']); 
+                                            }
+                                              
                                               
                                         }
                                         //echo $counter; 

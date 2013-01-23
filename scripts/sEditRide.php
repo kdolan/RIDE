@@ -1,26 +1,39 @@
 <?php
 require_once("func.php");
 
-
-//Store username in variable
-    //Get from webauth
-   $userName = $_SERVER['WEBAUTH_USER']; 
+  
 
 //connect to Db
 connectToDb();   
  
 //getVars
  $eventId = secureInput($_POST['eventId']);
- $driverName = secureInput($_POST['driverName']);
  $departDate = secureInput($_POST['departDate']);
  $departTime = secureInput($_POST['departTime']);
  $comments = secureInput($_POST['comments']);
  $seatsAvaliable = secureInput($_POST['seatsAvaliable']);
  
  $carId = secureInput($_POST['carId']);
-//$passengers = $_POST['passengers[]'][2];
-// echo $driverName."<br>";
-//echo "Passengers: ".$passengers;
+ 
+//Store username in variable
+   //Get driverName from webauth or textbox if user is admin 
+   if(isAdmin())
+   {
+      $driverName= queryName(secureInput($_POST['driverName'])); 
+   }
+   else
+   {
+       $driverName = $_SERVER['WEBAUTH_USER'];
+       //Permission error if user did not create this ride
+       $query = "SELECT * FROM `rideList` WHERE `eventId`=$eventId AND `carId`=$carId AND `driverName` LIKE '$driverName';";
+       $result = mysql_query($query);
+       if(mysql_num_rows($result)!=1)
+       {
+           //user did not create this ride. Permission error.
+           echo 'You do not have permission to edit this ride.';
+           die();
+       }  
+   }
 
 $passengers = $_POST['passegers']; //get array of passengers.
  
@@ -41,17 +54,27 @@ $passengers = $_POST['passegers']; //get array of passengers.
 
         $query="UPDATE `kevin_ride`.`rideList` SET
             `comments` = '$comments',
+            `driverName` = '$driverName',
             `depatrueTime` = ' $departDate',
-            `seatsAvailable` = '$seatsAvaliable' WHERE `rideList`.`eventId` =$eventId AND `rideList`.`carId`=$carId AND `rideList`.`driverName` LIKE '$driverName';" ;
+            `seatsAvailable` = '$seatsAvaliable' WHERE `rideList`.`eventId` =$eventId AND `rideList`.`carId`=$carId;" ;
 
         //echo $query;
 
         mysql_query($query);
+        
+        //If driver is listed as needing ride. Remove them from the table as needing ride  
+         $query = "DELETE FROM `kevin_ride`.`passengers` WHERE 
+             `passengers`.`eventId` =$eventId AND `passengers`.`carId`=0 AND `passengers`.`passengerName` LIKE '$driverName'";
+             mysql_query($query); 
 
 //Add passengers to table
  //Check to see if passenger already has a ride for this event  
     
     //Remove duplicates from array of passengers
+    if($passengers==null)
+    {
+        header("location:../joinRide?eventId=$eventId&currentEvents=1&e=7"); 
+    }
     $passengers = array_unique($passengers);
     
     //Make sure no users listed already have rides.
@@ -61,7 +84,7 @@ $passengers = $_POST['passegers']; //get array of passengers.
         $passengerName = stripUsername($passengerName);
         
         $passengerName = secureInput($passengerName);
-        $query = "SELECT * FROM `kevin_ride`.`passengers` WHERE `passengers`.`eventId`=$eventId AND `passengers`.`passengerName` LIKE '$passengerName'";
+        $query = "SELECT * FROM `kevin_ride`.`passengers` WHERE `passengers`.`eventId`=$eventId AND `passengers`.`passengerName` LIKE '$passengerName' AND `passengers`.`carId`!=0";
          //echo  $query;
         $result = mysql_query($query);
         $numRows = mysql_num_rows($result);
