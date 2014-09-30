@@ -1,4 +1,4 @@
-RIDE
+RIDE (Deprecated)
 =============
 
 This project is design to making planning rides for large groups of people much 
